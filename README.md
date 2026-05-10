@@ -80,7 +80,7 @@ Then **feedback**: you apply *love / like / trash* to curated ideas. Loved domai
 
 ## Quick start
 
-Open Collider runs inside [Claude Code](https://claude.ai/code), in two modes.
+Open Collider runs inside [Claude Code](https://claude.ai/code), in two modes. Requires **Python >=3.10**.
 
 ### Skill mode (free, no API key)
 
@@ -106,7 +106,7 @@ cp .env.example .env
 
 ### Then in Claude Code:
 
-Run those skills successively:
+Run these slash commands successively:
 
 ```
 /collider_setup     # create a project (brief, reference texts, scoring axes)

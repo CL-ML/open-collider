@@ -2,6 +2,8 @@
 
 ## Setup
 
+Requires **Python >=3.10**.
+
 ```bash
 git clone https://github.com/CL-ML/open-collider.git
 cd open-collider
@@ -32,8 +34,8 @@ Both modes share the same prepare/parse layer:
 - `src/open_collider/strategies/`: domain generation strategies
 - `src/open_collider/phases/`: idea generation and scoring (prompt assembly + parsing)
 - `src/open_collider/scoring/`: scoring data loader and per-axis score parser
-- `src/open_collider/data/`: shared YAML config and prompt templates
-- `.claude/commands/`: Claude Code skills (orchestrate in skill mode, launch Python in API mode)
+- `src/open_collider/data/`: shared YAML config (prompt templates live in `projects/_template/prompts/`)
+- `.claude/commands/`: Claude Code slash commands (orchestrate in skill mode, launch Python in API mode)
 
 ## Guidelines
 

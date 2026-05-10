@@ -501,12 +501,8 @@ def generate_iter_report(project_dir: str, iteration: int) -> str:
 
             lines.append(f"### #{c.get('rank', '?')} [{c.get('score', '?')}] {flag_label}")
             lines.append(f"\n{c.get('text', '')}")
-            if c.get("why_selected"):
-                lines.append(f"\n**Why selected:** {c['why_selected']}")
-            if c.get("source_note"):
-                lines.append(f"**Source:** {c['source_note']}")
-            if c.get("challenge"):
-                lines.append(f"**Challenge:** {c['challenge']}")
+            if c.get("why_kept"):
+                lines.append(f"\n**Why kept:** {c['why_kept']}")
             lines.append("")
 
     report = "\n".join(lines)
@@ -664,10 +660,8 @@ def generate_brainstorm_report(project_dir: str) -> str:
             flag_label = {"loved": "❤️ LOVED", "liked": "👍 LIKED", "trashed": "🗑️ TRASHED"}.get(flag, "")
             lines.append(f"### [{c.get('score', '?')}] (iter {c['iteration']}) {flag_label}")
             lines.append(f"\n{c.get('text', '')}")
-            if c.get("why_selected"):
-                lines.append(f"\n**Why selected:** {c['why_selected']}")
-            if c.get("source_note"):
-                lines.append(f"**Source:** {c['source_note']}")
+            if c.get("why_kept"):
+                lines.append(f"\n**Why kept:** {c['why_kept']}")
             lines.append("")
 
     report = "\n".join(lines)

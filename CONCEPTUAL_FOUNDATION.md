@@ -159,7 +159,7 @@ Headline result, in two layers:
 
 Across 12 real-world projects, condition A (OC bisociation) sits further from baseline cloud B than B from itself on nearest-neighbor distance. **12/12 projects, p = 0.0002**, replicated on both BGE-large and e5-large-v2 embeddings.
 
-The two falsifiers move noticeably less. On BGE, A's effect size is roughly **13× larger than C** ("be original" instruction) and **4× larger than D** (length-matched deep brief). On e5, ratios drop to ~5.7× and ~2.8× respectively, but the direction holds. Direct pairwise checks (A vs C, A vs D) confirm A is the strongest mover at 11/12 and 11/12 on BGE (p ≤ .003 both).
+The two falsifiers move noticeably less. Across both embedding families, A's effect size is roughly **4–13× larger than C** ("be original" instruction) and **3–4× larger than D** (length-matched deep brief). The upper end comes from BGE-large (13× vs C, 4× vs D), the lower end from e5-large-v2 (5.7× vs C, 2.8× vs D); the direction holds in both. Direct pairwise checks (A vs C, A vs D) confirm A is the strongest mover at 11/12 and 11/12 on BGE (p ≤ .003 both).
 
 The geometric shift is real, embedding-family-independent, and not explained by either "be-original" instructions or longer briefs.
 
