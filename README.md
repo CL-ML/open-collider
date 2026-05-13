@@ -22,7 +22,7 @@ Adding more in-domain context to your prompt doesn't fix it. It concentrates the
 The way out is to inject material from somewhere the model wouldn't go on its own.
 
 <p align="center">
-  <img src="assets/diagrams/09_escape_mediocrity.png" alt="Injecting distant points A and B: the collision zone escapes the high-density basin" width="78%">
+  <img src="assets/diagrams/09_escape_mediocrity.png" alt="Injecting distant points A and B: the collision zone escapes the high-density basin" width="40%">
 </p>
 
 <p align="center"><sub><i>Visual extracted from the <a href="https://oparine.substack.com/">foundational article</a>.</i></sub></p>
@@ -62,6 +62,8 @@ The contrast above is the claim. The rest of this README is how to get it on you
 ## How a session works
 
 OC runs as **brainstorm sessions** built from multiple **iterations**. Each iteration runs the four steps below and surfaces ~10-20 curated ideas for your ideation problem.
+
+![How a session works · Brief → Domains → Collide → Curate](assets/diagrams/10_pipeline.png)
 
 The four steps:
 
