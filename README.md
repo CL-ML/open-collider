@@ -13,69 +13,6 @@ It's the first method shipped by [Oparine](https://oparine.ai), a research pract
 
 ---
 
-## The problem
-
-Ask an LLM for 50 ideas. Then ask again. Measure semantic similarity: 80%+ of outputs cluster in the same region. Different words, same substance. The model converges toward high-probability completions. We call this the **default-prompt basin**; researchers have started calling it the [**Artificial Hivemind**](https://arxiv.org/abs/2510.22954).
-
-Adding more in-domain context to your prompt doesn't fix it. It concentrates the response *deeper* into the same basin.
-
-The way out is to inject material from somewhere the model wouldn't go on its own.
-
-<p align="center">
-  <img src="assets/diagrams/09_escape_mediocrity.png" alt="Injecting distant points A and B: the collision zone escapes the high-density basin" width="40%">
-</p>
-
-<p align="center"><sub><i>Visual extracted from the <a href="https://oparine.substack.com/">foundational article</a>.</i></sub></p>
-
-The intuition: a constellation of distant attractors stretches the prompt across low-density regions of idea space, where the model wouldn't go on its own. The collision zones, where these attractors' trajectories converge, are where non-trivial ideas can emerge.
-
-→ Full theory and rationale: **[The Open Collider foundational article](https://oparine.substack.com/)**.
-
----
-
-## A concrete example
-
-Same brief, same model, same reference text. The only difference: Open Collider injects a **distant-domain collision** into the prompt.
-
-> **Brief:** *Structural redesigns of Spotify's Discover Weekly that break users out of their taste bubble.*
-
-<p align="center">
-  <img src="assets/diagrams/spotify-side-by-side.png" alt="Default LLM vs Open Collider, 3 ideas each on the Spotify Discover Weekly brief" width="100%">
-</p>
-
-<details>
-<summary><b>Same comparison as a table (accessible / indexable)</b></summary>
-
-|     | **Default LLM (B): direct prompting** | **Open Collider (A): distant-domain collisions** |
-|-----|-----------------------------------------|---------------------------------------------------|
-| 01  | **Decay Discovery.** Recommendations lose algorithmic weight exponentially after first exposure. Every recommended song gets a timestamp; its likelihood of re-recommendation halves each week, pushing the system to dig into uncharted territory because familiar options become algorithmically unavailable. | **Tail Fracture Protocol.** A Prince Rupert's drop resists a hammer blow to the head but shatters completely if the thin tail is touched. A user's taste has the same topology: their core genre commitments are nearly unbreakable from direct frontal approach, but the peripheral, rarely-played edges are catastrophically open. Surface tracks structurally similar to tail events, not the head. *↳ from glass physics / fracture mechanics* |
-| 02  | **Anti-Clustering Engine.** Map the multidimensional space of all user preferences, then deliberately serve content from the antipodal regions. If a user listens to indie folk, the engine pulls from heavy metal, experimental jazz, K-pop. Musical comfort treated as a problem to solve, not a preference to indulge. | **Production Chain Triangulation.** Genre tags are listener-facing constructs and useless for cross-genre discovery (defined by the same taste clusters they produce). Triangulate via production chain data: engineer, studio, mastering. A mastering engineer who worked on a record the user loves has worked on records across twenty genres they've never touched. Craft lineage as the bridge, not sonic similarity. *↳ from supply-chain provenance* |
-| 03  | **Skip Inversion Algorithm.** Tracks users skip most frequently get promoted; skip behavior reframed as challenge, not poor quality. Songs with diverse skip patterns across taste profiles receive amplification. The mechanism distinguishes "bad" skips (immediate rejection) from "challenging" skips (unfamiliarity). | **Substrate Penetration Scheduler.** Koji mold infiltrates rice with enzymatic hyphae for days before any visible transformation. Applied to discovery: instead of recommending unfamiliar tracks, inject micro-doses of structural elements from distant genres (a tuning system, a rhythmic subdivision, a harmonic ratio) embedded inside tracks the user already streams. *↳ from fermentation biology* |
-
-The B ideas are unobjectionable mechanisms: same neighborhood, tweaks to the recommendation function. The A ideas are pulled from glass physics, supply chains, and fermentation biology. Same brief; nowhere near the dense center.
-</details>
-
-The contrast above is the claim. The rest of this README is how to get it on your own briefs.
-
----
-
-## How a session works
-
-OC runs as **brainstorm sessions** built from multiple **iterations**. Each iteration runs the four steps below and surfaces ~10-20 curated ideas for your ideation problem.
-
-![How a session works · Brief → Domains → Collide → Curate](assets/diagrams/10_pipeline.png)
-
-The four steps:
-
-1. **Brief.** Describe your ideation problem, what kinds of ideas you're looking for, what makes a good idea, and give the model **raw reference material** (texts, examples, samples of voice) so it has rich context about the problem. General-purpose, any ideation problem welcome.
-2. **Domains.** An LLM generates structurally distant knowledge domains. Each one carries a counter-intuitive *active principle* (a mechanism) and a bridging question toward your problem.
-3. **Collide.** The mass-generation engine. Each (reference text × distant domain) pair gets its own isolated context window. Goal: produce **a massive volume of candidate ideas**, drawn from many reference materials and many structurally distant domains in parallel. ~20 ideas per collision, ~240 per strategy, three strategies per iteration.
-4. **Curate.** The essential filter. From the mass-generated pool, extract the **gems** that are both **relevant** to your brief AND **non-trivial** (true collisions, verifiable mechanisms, in your voice). Most of the mass is noise; that's expected. The whole point is to surface the few high-signal ideas worth your attention.
-
-Then **feedback**: you apply *love / like / trash* to curated ideas. Loved domains *deepen* into new specialties; loved mechanisms *refresh* into new disciplines; fresh domains keep exploring. Sessions typically exhaust after 3–5 iterations.
-
----
-
 ## Quick start
 
 Open Collider runs inside [Claude Code](https://claude.ai/code), in two modes. Requires **Python >=3.10**.
@@ -121,6 +58,67 @@ On first `/brainstorm`, you'll be asked to choose API or Skill mode. The choice 
 | Requirements   | Anthropic API key               | Claude Code Max subscription         |
 
 **What you'll see on a first run.** `/collider_setup` produces a project folder with your brief, reference texts, and scoring axes. `/brainstorm` then prints the domain bank as it generates, streams idea batches per collision, scores them on your axes, and presents curated ideas inline for love/like/trash. A first iteration ends with a `REPORT.md` you can read or share, and a structured `iter_001/` folder for inspection.
+
+---
+
+## The problem
+
+Ask an LLM for 50 ideas. Then ask again. Measure semantic similarity: 80%+ of outputs cluster in the same region. Different words, same substance. The model converges toward high-probability completions. We call this the **default-prompt basin**; researchers have started calling it the [**Artificial Hivemind**](https://arxiv.org/abs/2510.22954).
+
+Adding more in-domain context to your prompt doesn't fix it. It concentrates the response *deeper* into the same basin.
+
+The way out is to inject material from somewhere the model wouldn't go on its own.
+
+<p align="center">
+  <img src="assets/diagrams/09_escape_mediocrity.png" alt="Injecting distant points A and B: the collision zone escapes the high-density basin" width="40%">
+</p>
+
+<p align="center"><sub><i>Visual extracted from the <a href="https://oparine.substack.com/">foundational article</a>.</i></sub></p>
+
+The intuition: a constellation of distant attractors stretches the prompt across low-density regions of idea space, where the model wouldn't go on its own. The collision zones, where these attractors' trajectories converge, are where non-trivial ideas can emerge.
+
+→ Full theory and rationale: **[The Open Collider foundational article](https://oparine.substack.com/)**.
+
+---
+
+## A concrete example
+
+Same brief, same model, same reference text. The only difference: Open Collider injects a **distant-domain collision** into the prompt.
+
+> **Brief:** *Structural redesigns of Spotify's Discover Weekly that break users out of their taste bubble.*
+
+<p align="center">
+  <img src="assets/diagrams/spotify-side-by-side.png" alt="Default LLM vs Open Collider, 3 ideas each on the Spotify Discover Weekly brief" width="100%">
+</p>
+
+<details>
+<summary><b>Same comparison as a table (accessible / indexable)</b></summary>
+
+|     | **Default LLM (B): direct prompting** | **Open Collider (A): distant-domain collisions** |
+|-----|-----------------------------------------|---------------------------------------------------|
+| 01  | **Decay Discovery.** Recommendations lose algorithmic weight exponentially after first exposure. Every recommended song gets a timestamp; its likelihood of re-recommendation halves each week, pushing the system to dig into uncharted territory because familiar options become algorithmically unavailable. | **Tail Fracture Protocol.** A Prince Rupert's drop resists a hammer blow to the head but shatters completely if the thin tail is touched. A user's taste has the same topology: their core genre commitments are nearly unbreakable from direct frontal approach, but the peripheral, rarely-played edges are catastrophically open. Surface tracks structurally similar to tail events, not the head. *↳ from glass physics / fracture mechanics* |
+| 02  | **Anti-Clustering Engine.** Map the multidimensional space of all user preferences, then deliberately serve content from the antipodal regions. If a user listens to indie folk, the engine pulls from heavy metal, experimental jazz, K-pop. Musical comfort treated as a problem to solve, not a preference to indulge. | **Production Chain Triangulation.** Genre tags are listener-facing constructs and useless for cross-genre discovery (defined by the same taste clusters they produce). Triangulate via production chain data: engineer, studio, mastering. A mastering engineer who worked on a record the user loves has worked on records across twenty genres they've never touched. Craft lineage as the bridge, not sonic similarity. *↳ from supply-chain provenance* |
+| 03  | **Skip Inversion Algorithm.** Tracks users skip most frequently get promoted; skip behavior reframed as challenge, not poor quality. Songs with diverse skip patterns across taste profiles receive amplification. The mechanism distinguishes "bad" skips (immediate rejection) from "challenging" skips (unfamiliarity). | **Substrate Penetration Scheduler.** Koji mold infiltrates rice with enzymatic hyphae for days before any visible transformation. Applied to discovery: instead of recommending unfamiliar tracks, inject micro-doses of structural elements from distant genres (a tuning system, a rhythmic subdivision, a harmonic ratio) embedded inside tracks the user already streams. *↳ from fermentation biology* |
+
+The B ideas are unobjectionable mechanisms: same neighborhood, tweaks to the recommendation function. The A ideas are pulled from glass physics, supply chains, and fermentation biology. Same brief; nowhere near the dense center.
+</details>
+
+---
+
+## How a session works
+
+OC runs as **brainstorm sessions** built from multiple **iterations**. Each iteration runs the four steps below and surfaces ~10-20 curated ideas for your ideation problem.
+
+![How a session works · Brief → Domains → Collide → Curate](assets/diagrams/10_pipeline.png)
+
+The four steps:
+
+1. **Brief.** Describe your ideation problem, what kinds of ideas you're looking for, what makes a good idea, and give the model **raw reference material** (texts, examples, samples of voice) so it has rich context about the problem. General-purpose, any ideation problem welcome.
+2. **Domains.** An LLM generates structurally distant knowledge domains. Each one carries a counter-intuitive *active principle* (a mechanism) and a bridging question toward your problem.
+3. **Collide.** The mass-generation engine. Each (reference text × distant domain) pair gets its own isolated context window. Goal: produce **a massive volume of candidate ideas**, drawn from many reference materials and many structurally distant domains in parallel. ~20 ideas per collision, ~240 per strategy, three strategies per iteration.
+4. **Curate.** The essential filter. From the mass-generated pool, extract the **gems** that are both **relevant** to your brief AND **non-trivial** (true collisions, verifiable mechanisms, in your voice). Most of the mass is noise; that's expected. The whole point is to surface the few high-signal ideas worth your attention.
+
+Then **feedback**: you apply *love / like / trash* to curated ideas. Loved domains *deepen* into new specialties; loved mechanisms *refresh* into new disciplines; fresh domains keep exploring. Sessions typically exhaust after 3–5 iterations.
 
 ---
 
@@ -234,7 +232,15 @@ Open Collider is a methodical implementation of this principle, scaled by LLMs.
 
 Open Collider is a method developed at **[Oparine](https://oparine.ai)**, a research practice exploring the limits of LLM creativity. The engine, the methodology, and the 12-project benchmark are open source.
 
-Consulting inquiries: **hello@oparine.ai**.
+## About me & Oparine
+
+I'm **Cédric Lion**. Quantitative economist and data scientist trained at PSL (Paris Sciences & Lettres). Former research analyst on Web3 economics at Animoca Brands. Full-time on AI creativity research since 2025.
+
+I'm convinced **human creativity is synthesizable by LLMs**: with the right architecture, language models can surface ideas that were never formulated in their training data. Open Collider is the first concrete bet in that direction. I build the systems, run the experiments, and publish what works.
+
+I founded **Oparine** to pursue this in two directions at once: fundamental research on what mechanically moves models out of their default outputs, and applied engagements with companies that want to build internal creativity tools (R&D ideation, strategic exploration, brand voice, product invention).
+
+If that's a fit for your team: **hello@oparine.ai**.
 
 ## License
 
